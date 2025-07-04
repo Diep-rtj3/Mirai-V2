@@ -1,61 +1,113 @@
->  **HIỆN TẠI PRJ CHƯA UPDATE VÌ QUÁ BẬN HỌC SORRY**
-<h1> Xin chào bạn trước màn hình 🍑 <img src="https://i.imgur.com/b7BPW9e.png" width="37"></h1> 
+const readline = require('readline');
 
-<p align="center">
-    <img align="center" alt="PNG" src="https://i.imgur.com/b7BPW9e.png" />
-</p>
-<h1>HƯỚNG DẪN CÁCH CÀI ĐẶT BOT MESSENGER TRÊN CÁC NỀN TẢNG</h1>
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
->  **TRƯỚC KHI CHẠY BOT CÁC BẠN PHẢI CHẤP NHẬN VIỆC ACC FACEBOOK BỊ QUÉT VÀ DIE, MỌI KHIẾU NẠI VỀ ACC FACEBOOK BÊN MÌNH KHÔNG CHỊU TRÁCH NHIỆM**
+console.log("مرحبا! كيف يمكنني مساعدتك؟");
 
-<h1>Hướng dẫn chạy ở Replit và CMD</h1> 
+rl.setPrompt('أنت: ');
+rl.prompt();
 
-**Đối với [Replit](https://replit.com)**
+rl.on('line', (input) => {
+  if (input.trim().toLowerCase() === "مرحبا") {
+    console.log("أنا: مرحبا! كيف يمكنني مساعدتك؟");
+  } else if (input.trim().toLowerCase() === "شكرا") {
+    console.log("أنا: على الرحب والسعة!");
+  } else {
+    console.log("أنا: آسف، لم أفهم ما تقصد.");
+  }
+  rl.prompt();
+});
+const readline = require('readline');
 
-**Thứ tự các thao tác trên [Replit](https://replit.com/)**
-- Cần chuẩn bị 1 tài khoản [Replit](https://replit.com/)
-- Chọn **Create Repl**
-- Qua tab **Import from github** 
-- Nhập link **github** này vào **from** và **click** vào nút **Import from github**
-- Đợi repl **Importing...**
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-**LƯU Ý: NẾU CÓ REPL PRO/HACKER THÌ CHỌN PRIVATE TRÁNH BỊ MÒ FILE NHÉ**
+console.log("مرحبا! يمكنك طلب معلومات عن:");
+console.log("1. التاريخ");
+console.log("2. الجغرافيا");
+console.log("3. العلوم");
+console.log("4. الثقافة");
 
-**Cách cài đặt - gõ từng lệnh theo thứ tự dưới đây và đợi cài đặt**
+const getInfo = () => {
+  rl.question('اختر رقم الخيار: ', (choice) => {
+    switch (choice) {
+      case '1':
+        console.log("التاريخ:");
+        console.log("الحرب العالمية الأولى: 1914-1918");
+        console.log("الحرب العالمية الثانية: 1939-1945");
+        break;
+      case '2':
+        console.log("الجغرافيا:");
+        console.log("أكبر قارة: آسيا");
+        console.log("أكبر محيط: المحيط الهادئ");
+        break;
+      case '3':
+        console.log("العلوم:");
+        console.log("أسرع حيوان: الفهد");
+        console.log("أكبر كوكب: المشتري");
+        break;
+      case '4':
+        console.log("الثقافة:");
+        console.log("أشهر كتاب: ألف ليلة وليلة");
+        console.log("أشهر فنان: ليوناردو دافنشي");
+        break;
+      default:
+        console.log("اختيار غير صالح");
+    }
+    rl.question('هل تريد الاستمرار؟ (نعم/لا): ', (response) => {
+      if (response.toLowerCase() === 'لا') {
+        rl.close();
+      } else {
+        getInfo();
+      }
+    });
+  });
+};
 
-- Chuyển qua tab **Shell** và gõ các lệnh theo thứ tự sau:
-- **npm i**
-- **npm i fca-horizon-remastered** 
-- **npm audit fix**
-- **Ấn nút run trên màn hình** - hoặc **npm start**
+getInfo();
+const axios = require('axios');
 
+const createFacebookGroup = async (groupName, groupDescription, accessToken) => {
+  try {
+    const response = await axios.post(`https:                                     
+      name: groupName,
+      description: groupDescription,
+      access_token: accessToken
+    });
+    console.log(`//graph.facebook.com/v13.0/groups`, {
+      name: groupName,
+      description: groupDescription,
+      access_token: accessToken
+    });
+    console.log(`تم إنشاء المجموعة بنجاح: ${response.data.id}`);
+    return response.data.id;
+  } catch (error) {
+    console.error(`خطأ في إنشاء المجموعة: ${error.message}`);
+  }
+};
 
-**Cách cài đặt và chạy bot tại cmd cho PC**
+const addMemberToGroup = async (groupId, userId, accessToken) => {
+  try {
+    const response = await axios.post(`https://graph.facebook.com/v13.0/${groupId}/members`, {
+      user: userId,
+      access_token: accessToken
+    });
+    console.log(`تم إضافة العضو بنجاح`);
+  } catch (error) {
+    console.error(`خطأ في إضافة العضو: ${error.message}`);
+  }
+};
 
-- Ở phần **Code** có thể chọn **Download ZIP**
-- Giải nén file **Download ZIP** vừa tải kia
-- Tiến hành mở **cmd** từ PC và dùng lệnh **cd** để di chuyển đến thư mục file bot bạn đang nằm
+// استخدم الدوال لإنشاء مجموعة وإضافة أعضاء
+const groupName = 'مجموعة الدردشة';
+const groupDescription = 'مجموعة للدردشة والمناقشة';
+const accessToken = 'YOUR_ACCESS_TOKEN';
+const groupId = await createFacebookGroup(groupName, groupDescription, accessToken);
+const userId = 'USER_ID_TO_ADD';
+addMemberToGroup(groupId, userId, accessToken);
 
-- Nhập các lệnh như sau:
-- **npm i** 
-- **npm i fca-horizon-remastered**
-- **npm audit fix**
-- **node index.js** 
-
-**Các câu lệnh giúp ích cho bạn**
-- Kiểm tra phiên bản cài đặt NPM: **npm --v**
-- Update node: **npm init -y && npm i --save-dev node@18 && npm config set prefix=$(pwd)/node_modules/node && export PATH=$(pwd)/node_modules/node/bin:$PATH**
-- Liệt kê tất cả các cấu hình cho NPM: **npm config ls -l**
-- Xem package: **npm view <name package>**
-- Cập nhật dev packages: **npm update --dev** 
-- Xem bản nodeJS mới nhất **npm view node version**   
-
-# 🤝🏻 Connect
-<p align="center">  
-&nbsp; <a href="https://www.facebook.com/caochungdat" target="_blank" rel="noopener noreferrer"><img src="https://img.icons8.com/plasticine/100/000000/facebook.png"  width="90" /></a>
-&nbsp; <a href="https://github.com/chungdat02" target="_blank" rel="noopener noreferrer"><img src="https://img.icons8.com/plasticine/100/000000/github.png" width="90" /></a>
-&nbsp; <a href="https://www.instagram.com/caochungdat/" target="_blank" rel="noopener noreferrer"><img src="https://img.icons8.com/plasticine/100/000000/instagram-new.png" width="90" /></a>  
-&nbsp; <a href="https://www.tiktok.com/@caochungdat" target="_blank" rel="noopener noreferrer"><img src="https://i.imgur.com/jcWPUix.png" width="90" /></a>  
-&nbsp; <a href="chungdatcntt1808@gmail.com" target="_blank" rel="noopener noreferrer"><img src="https://img.icons8.com/plasticine/100/000000/gmail.png"  width="90" /></a>
-</p>
-    <h1><center>Thank To <center></h1>
